@@ -6,13 +6,7 @@
 //
 
 #include <iostream>
-#include <sstream>
-#include <string>
 #include <cmath>
-
-
-using namespace std;
-
 #include <arm_acle.h>
 
 
@@ -21,12 +15,19 @@ bool isDecimalPalindrom(const unsigned long long l) {
   for(unsigned long c = l; c > 0 ; c=c/10)
     reversed = reversed * 10 + c % 10;
   return l == reversed;
-//  std::cout<< is << "\n";
-//  printf("Reverse of given number is:%llu\n",reversed);
 }
 
 void find_palindroms() {
   int counter = 0;
+
+  counter += 1;
+  std::cout << counter << "\n";
+  std::cout << 0 << "\n"<< 0 << "\n\n";
+
+  counter += 1;
+  std::cout << counter << "\n";
+  std::cout << 1 << "\n"<< 1 << "\n\n";
+
   for(unsigned long long i = 1; i < 1000000000000000; i++) {
     const int binary_length = std::floor(std::log2(i)) + 1;
 
