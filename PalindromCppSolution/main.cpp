@@ -60,21 +60,21 @@ void find_palindroms() {
   counter += 1;
   std::cout << counter << "\n";
   std::cout << 1 << "\n"<< 1 << "\n\n";
-  std::bitset<64> one(1);
+  std::bitset<128> one(1);
 
-  for(unsigned long long i = 1; i < 100000000; i++) {
+  for(__uint128_t i = 1; i < 100000000; i++) {
     const int binary_length = std::floor(std::log2(i)) + 1;
 
-    std::bitset<64> binary_number(i);
-    std::bitset<64> reversed_binary(__rbitll(i));
+    std::bitset<128> binary_number(i);
+    std::bitset<128> reversed_binary(__rbitll(i));
 
-    std::bitset<64> concated_even_length_binary = (binary_number << binary_length) |
+    std::bitset<128> concated_even_length_binary = (binary_number << binary_length) |
                                                   (reversed_binary >> (64 - binary_length));
 
-    std::bitset<64> concated_odd0_length_binary = (binary_number << (binary_length + 1)) |
+    std::bitset<128> concated_odd0_length_binary = (binary_number << (binary_length + 1)) |
                                                   (reversed_binary >> (64 - binary_length));
 
-    std::bitset<64> concated_odd1_length_binary = (binary_number << (binary_length + 1)) |
+    std::bitset<128> concated_odd1_length_binary = (binary_number << (binary_length + 1)) |
                                                   (one << binary_length) |
                                                   (reversed_binary >> (64 - binary_length));
 
