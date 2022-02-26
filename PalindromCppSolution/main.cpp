@@ -12,6 +12,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#import "LargeNumbersFinder.h"
+
 std::vector<unsigned long long> small_pow_10_vector = {};
 
 void intialize_small_10_pow_vector() {
@@ -56,7 +58,7 @@ bool inline failFastIsDecimalPalindrom(const unsigned long long l) {
 // 2^31 concatenated with itself and adding one bit can be at most 2^63 bits.
 __uint128_t smallPalindromesThreshold = ((unsigned long)2) << 31;
 
-static int counter = 2;
+int counter = 2;
 
 inline void printIfDecimalPalindrome(__uint64_t binaryPalindrome) {
   if (failFastIsDecimalPalindrom(binaryPalindrome)) {
@@ -83,8 +85,18 @@ inline void checkSmallPalindromes(unsigned long num) {
 }
 
 void find_palindroms() {
+  auto start = CACurrentMediaTime();
+
   for (unsigned long i = 1; i < smallPalindromesThreshold; ++i) {
     checkSmallPalindromes(i);
+  }
+
+  auto end = CACurrentMediaTime();
+  
+  std::cout << "Starting large palindromes, time: " << end - start << std::endl;
+  
+  for (unsigned long i = smallPalindromesThreshold; i < ULONG_MAX; ++i) {
+    checkLargePalindromes(i);
   }
 }
 
@@ -94,6 +106,7 @@ int main(int argc, const char * argv[]) {
   auto start = CACurrentMediaTime();
 
   intialize_small_10_pow_vector();
+  intialize_large_10_pow_vector();
   find_palindroms();
 
   auto end = CACurrentMediaTime();
