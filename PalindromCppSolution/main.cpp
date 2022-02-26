@@ -58,7 +58,7 @@ __uint128_t trivialCheckThreshold = 1000000000;
 static int counter = 2;
 
 inline void printIfDecimalPalindrome(__uint64_t binaryPalindrome) {
-  if (trivialIsDecimalPalindrom(binaryPalindrome)) {
+  if (failFastIsDecimalPalindrom(binaryPalindrome)) {
     counter += 1;
     std::cout << counter << "\n";
     std::cout << binaryPalindrome << "\n" << std::bitset<64>(binaryPalindrome) << "\n\n";
