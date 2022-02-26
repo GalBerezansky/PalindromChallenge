@@ -54,40 +54,44 @@ bool inline failFastIsDecimalPalindrom(const unsigned long long l) {
 
 __uint128_t trivialCheckThreshold = 1000000000;
 
+static int counter = 2;
+
+inline void checkPalindromes(__uint128_t i) {
+  const int binary_length = std::floor(std::log2(i)) + 1;
+
+  std::bitset<128> binary_number(i);
+  std::bitset<128> reversed_binary(__rbitll(i));
+
+  std::bitset<128> concated_even_length_binary = (binary_number << binary_length) |
+                                                (reversed_binary >> (64 - binary_length));
+
+  std::bitset<128> concated_odd0_length_binary = (binary_number << (binary_length + 1)) |
+                                                (reversed_binary >> (64 - binary_length));
+
+  std::bitset<128> concated_odd1_length_binary = (binary_number << (binary_length + 1)) |
+                                                (std::bitset<128>(1) << binary_length) |
+                                                (reversed_binary >> (64 - binary_length));
+
+  if (trivialIsDecimalPalindrom(concated_even_length_binary.to_ullong())) {
+    counter += 1;
+    std::cout << counter << "\n";
+    std::cout << concated_even_length_binary.to_ullong() << "\n"<< concated_even_length_binary << "\n\n";
+  }
+  if (trivialIsDecimalPalindrom(concated_odd0_length_binary.to_ullong())) {
+    counter += 1;
+    std::cout << counter << "\n";
+    std::cout << concated_odd0_length_binary.to_ullong() << "\n"<< concated_odd0_length_binary << "\n\n";
+  }
+  if (trivialIsDecimalPalindrom(concated_odd1_length_binary.to_ullong())) {
+    counter += 1;
+    std::cout << counter << "\n";
+    std::cout << concated_odd1_length_binary.to_ullong() << "\n"<< concated_odd1_length_binary << "\n\n";
+  }
+}
+
 void find_palindroms() {
-  int counter = 2;
-  
   for(__uint128_t i = 1; i < trivialCheckThreshold; i++) {
-    const int binary_length = std::floor(std::log2(i)) + 1;
-
-    std::bitset<128> binary_number(i);
-    std::bitset<128> reversed_binary(__rbitll(i));
-
-    std::bitset<128> concated_even_length_binary = (binary_number << binary_length) |
-                                                  (reversed_binary >> (64 - binary_length));
-
-    std::bitset<128> concated_odd0_length_binary = (binary_number << (binary_length + 1)) |
-                                                  (reversed_binary >> (64 - binary_length));
-
-    std::bitset<128> concated_odd1_length_binary = (binary_number << (binary_length + 1)) |
-                                                  (std::bitset<128>(1) << binary_length) |
-                                                  (reversed_binary >> (64 - binary_length));
-
-    if (trivialIsDecimalPalindrom(concated_even_length_binary.to_ullong())) {
-      counter += 1;
-      std::cout << counter << "\n";
-      std::cout << concated_even_length_binary.to_ullong() << "\n"<< concated_even_length_binary << "\n\n";
-    }
-    if (trivialIsDecimalPalindrom(concated_odd0_length_binary.to_ullong())) {
-      counter += 1;
-      std::cout << counter << "\n";
-      std::cout << concated_odd0_length_binary.to_ullong() << "\n"<< concated_odd0_length_binary << "\n\n";
-    }
-    if (trivialIsDecimalPalindrom(concated_odd1_length_binary.to_ullong())) {
-      counter += 1;
-      std::cout << counter << "\n";
-      std::cout << concated_odd1_length_binary.to_ullong() << "\n"<< concated_odd1_length_binary << "\n\n";
-    }
+    checkPalindromes(i);
   }
 
   for(unsigned long long i = 100000000; i < 1000000000000; i++) {
