@@ -64,21 +64,20 @@ inline void printIfDecimalPalindrome(std::bitset<128> binaryPalindrome) {
   }
 }
 
-inline void checkPalindromes(__uint128_t i) {
-  const int binary_length = std::floor(std::log2(i)) + 1;
+inline void checkPalindromes(__uint64_t num) {
+  const int num_length = std::floor(std::log2(num)) + 1;
 
-  std::bitset<128> binary_number(i);
-  std::bitset<128> reversed_binary(__rbitll(i));
+  __uint64_t reversed_num(__rbitll(num));
 
-  std::bitset<128> palindromeToCheck =
-      (binary_number << binary_length) | (reversed_binary >> (64 - binary_length));
+  __uint128_t palindromeToCheck =
+      ((__uint128_t)num << num_length) | ((__uint128_t)reversed_num >> (64 - num_length));
   printIfDecimalPalindrome(palindromeToCheck);
 
   palindromeToCheck =
-      (binary_number << (binary_length + 1)) | (reversed_binary >> (64 - binary_length));
+      ((__uint128_t)num << (num_length + 1)) | ((__uint128_t)reversed_num >> (64 - num_length));
   printIfDecimalPalindrome(palindromeToCheck);
 
-  palindromeToCheck = palindromeToCheck | (std::bitset<128>(1) << binary_length);
+  palindromeToCheck = palindromeToCheck | (1 << num_length);
   printIfDecimalPalindrome(palindromeToCheck);
 }
 
