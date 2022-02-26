@@ -94,9 +94,10 @@ void find_palindroms() {
   auto end = CACurrentMediaTime();
   
   std::cout << "Starting large palindromes, time: " << end - start << std::endl;
-  
+
+  // 2533136923 generates the palyndrom 10879740244204797801. (good for sanity checks.  )
   for (unsigned long i = smallPalindromesThreshold; i < smallPalindromesThreshold * 2; ++i) {
-    checkLargePalindromes(i);
+    checkLargePalindromes(i, 32);
   }
 }
 

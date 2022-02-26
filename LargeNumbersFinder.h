@@ -63,12 +63,8 @@ inline void printIfDecimalPalindromeLarge(const __uint128_t binaryPalindrome) {
   }
 }
 
-void checkLargePalindromes(const unsigned long num) {
-  const int num_length = std::floor(std::log2(num)) + 1;
-
-  unsigned long reversed_num(__rbitll(num) >> 32);
-
-  __uint128_t reversedLowerHalf = (__uint128_t)reversed_num >> (32 - num_length);
+void checkLargePalindromes(const unsigned long num, const unsigned int num_length) {
+  __uint128_t reversedLowerHalf = (__uint128_t)__rbitll(num) >> (64 - num_length);
   __uint128_t palindromeToCheck = ((__uint128_t)num << num_length) | reversedLowerHalf;
   printIfDecimalPalindromeLarge(palindromeToCheck);
 
