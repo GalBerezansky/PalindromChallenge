@@ -52,15 +52,16 @@ bool inline failFastIsDecimalPalindrom(const unsigned long long l) {
     return true;
 }
 
+// This is about 1/4 of 2^32.
 __uint128_t trivialCheckThreshold = 1000000000;
 
 static int counter = 2;
 
-inline void printIfDecimalPalindrome(std::bitset<128> binaryPalindrome) {
-  if (trivialIsDecimalPalindrom(binaryPalindrome.to_ullong())) {
+inline void printIfDecimalPalindrome(__uint64_t binaryPalindrome) {
+  if (trivialIsDecimalPalindrom(binaryPalindrome)) {
     counter += 1;
     std::cout << counter << "\n";
-    std::cout << binaryPalindrome.to_ullong() << "\n" << binaryPalindrome << "\n\n";
+    std::cout << binaryPalindrome << "\n" << std::bitset<64>(binaryPalindrome) << "\n\n";
   }
 }
 
@@ -69,9 +70,8 @@ inline void checkSmallPalindromes(__uint32_t num) {
 
   __uint32_t reversed_num(__rbit(num));
 
-  auto reversedLowerHalf = (__uint64_t)reversed_num >> (32 - num_length);
-  __uint64_t palindromeToCheck =
-      ((__uint64_t)num << num_length) | reversedLowerHalf;
+  __uint64_t reversedLowerHalf = (__uint64_t)reversed_num >> (32 - num_length);
+  __uint64_t palindromeToCheck = ((__uint64_t)num << num_length) | reversedLowerHalf;
   printIfDecimalPalindrome(palindromeToCheck);
 
   palindromeToCheck = ((__uint64_t)num << (num_length + 1)) | reversedLowerHalf;
