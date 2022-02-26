@@ -75,7 +75,7 @@ void checkLargePalindromes(const unsigned long num) {
   palindromeToCheck = ((__uint128_t)num << (num_length + 1)) | reversedLowerHalf;
   printIfDecimalPalindromeLarge(palindromeToCheck);
 
-  palindromeToCheck = palindromeToCheck | (1 << num_length);
+  palindromeToCheck = palindromeToCheck | ((__uint128_t)1 << num_length);
   printIfDecimalPalindromeLarge(palindromeToCheck);
 }
 

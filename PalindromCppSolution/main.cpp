@@ -56,7 +56,7 @@ bool inline failFastIsDecimalPalindrom(const unsigned long long l) {
 
 // This was chosen because the resulting palindrome is contained in 2^64 for small numbers, and the
 // 2^31 concatenated with itself and adding one bit can be at most 2^63 bits.
-__uint128_t smallPalindromesThreshold = ((unsigned long)2) << 31;
+__uint128_t smallPalindromesThreshold = ((unsigned long)1) << 31;
 
 int counter = 2;
 
@@ -80,7 +80,7 @@ inline void checkSmallPalindromes(const unsigned long num) {
   palindromeToCheck = ((__uint64_t)num << (num_length + 1)) | reversedLowerHalf;
   printIfDecimalPalindrome(palindromeToCheck);
 
-  palindromeToCheck = palindromeToCheck | (1 << num_length);
+  palindromeToCheck = palindromeToCheck | ((__uint64_t)1 << num_length);
   printIfDecimalPalindrome(palindromeToCheck);
 }
 
