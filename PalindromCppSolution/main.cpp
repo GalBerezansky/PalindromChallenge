@@ -68,7 +68,7 @@ inline void printIfDecimalPalindrome(__uint64_t binaryPalindrome) {
   }
 }
 
-inline void checkSmallPalindromes(unsigned long num) {
+inline void checkSmallPalindromes(const unsigned long num) {
   const int num_length = std::floor(std::log2(num)) + 1;
 
   unsigned long reversed_num(__rbitll(num) >> 32);

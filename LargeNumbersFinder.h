@@ -55,7 +55,7 @@ inline void print128BitsNumber(const __uint128_t num) {
   std::cout << (__uint64_t)(num >> 64) << (__uint64_t)num << "\n" << std::bitset<128>(num) << "\n\n";
 }
 
-inline void printIfDecimalPalindromeLarge(__uint128_t binaryPalindrome) {
+inline void printIfDecimalPalindromeLarge(const __uint128_t binaryPalindrome) {
   if (failFastIsDecimalPalindromLarge(binaryPalindrome)) {
     counter += 1;
     std::cout << counter << "\n";
@@ -63,7 +63,7 @@ inline void printIfDecimalPalindromeLarge(__uint128_t binaryPalindrome) {
   }
 }
 
-void checkLargePalindromes(unsigned long num) {
+void checkLargePalindromes(const unsigned long num) {
   const int num_length = std::floor(std::log2(num)) + 1;
 
   unsigned long reversed_num(__rbitll(num) >> 32);
