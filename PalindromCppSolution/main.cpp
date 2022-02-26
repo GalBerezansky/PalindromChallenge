@@ -78,9 +78,7 @@ inline void checkPalindromes(__uint128_t i) {
       (binary_number << (binary_length + 1)) | (reversed_binary >> (64 - binary_length));
   printIfDecimalPalindrome(palindromeToCheck);
 
-  palindromeToCheck =
-      (binary_number << (binary_length + 1)) | (std::bitset<128>(1) << binary_length) |
-      (reversed_binary >> (64 - binary_length));
+  palindromeToCheck = palindromeToCheck | (std::bitset<128>(1) << binary_length);
   printIfDecimalPalindrome(palindromeToCheck);
 }
 
