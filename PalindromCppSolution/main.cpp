@@ -52,9 +52,9 @@ bool inline failFastIsDecimalPalindrom(const unsigned long long l) {
     return true;
 }
 
-// This is equal to 2^31. This was chosen because the resulting palindrome is contained in 2^64 for
-// small numbers, and the 2^31 concatenated with itself and adding one bit can be at most 2^63 bits.
-__uint128_t smallPalindromesThreshold = ULONG_MAX / 2;
+// This was chosen because the resulting palindrome is contained in 2^64 for small numbers, and the
+// 2^31 concatenated with itself and adding one bit can be at most 2^63 bits.
+__uint128_t smallPalindromesThreshold = ((unsigned long)2) << 31;
 
 static int counter = 2;
 
