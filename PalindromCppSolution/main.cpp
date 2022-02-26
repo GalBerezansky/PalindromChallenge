@@ -64,17 +64,17 @@ inline void printIfDecimalPalindrome(std::bitset<128> binaryPalindrome) {
   }
 }
 
-inline void checkPalindromes(__uint64_t num) {
+inline void checkSmallPalindromes(__uint32_t num) {
   const int num_length = std::floor(std::log2(num)) + 1;
 
-  __uint64_t reversed_num(__rbitll(num));
+  __uint32_t reversed_num(__rbit(num));
 
-  __uint128_t palindromeToCheck =
-      ((__uint128_t)num << num_length) | ((__uint128_t)reversed_num >> (64 - num_length));
+  auto reversedLowerHalf = (__uint64_t)reversed_num >> (32 - num_length);
+  __uint64_t palindromeToCheck =
+      ((__uint64_t)num << num_length) | reversedLowerHalf;
   printIfDecimalPalindrome(palindromeToCheck);
 
-  palindromeToCheck =
-      ((__uint128_t)num << (num_length + 1)) | ((__uint128_t)reversed_num >> (64 - num_length));
+  palindromeToCheck = ((__uint64_t)num << (num_length + 1)) | reversedLowerHalf;
   printIfDecimalPalindrome(palindromeToCheck);
 
   palindromeToCheck = palindromeToCheck | (1 << num_length);
@@ -82,8 +82,8 @@ inline void checkPalindromes(__uint64_t num) {
 }
 
 void find_palindroms() {
-  for(__uint128_t i = 1; i < trivialCheckThreshold; i++) {
-    checkPalindromes(i);
+  for(__uint32_t i = 1; i < trivialCheckThreshold; i++) {
+    checkSmallPalindromes(i);
   }
 
   for(unsigned long long i = 100000000; i < 1000000000000; i++) {
