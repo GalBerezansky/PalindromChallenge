@@ -95,7 +95,7 @@ void find_palindroms() {
   
   std::cout << "Starting large palindromes, time: " << end - start << std::endl;
   
-  for (unsigned long i = smallPalindromesThreshold; i < ULONG_MAX; ++i) {
+  for (unsigned long i = smallPalindromesThreshold; i < smallPalindromesThreshold * 2; ++i) {
     checkLargePalindromes(i);
   }
 }
