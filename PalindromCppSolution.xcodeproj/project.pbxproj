@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		97379BE027C8FBDA00DBA602 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97379BDF27C8FBDA00DBA602 /* main.cpp */; };
+		97379BE027C8FBDA00DBA602 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 97379BDF27C8FBDA00DBA602 /* main.mm */; };
 		B572D6B027CA56BF006C3D0A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B572D6AF27CA56BF006C3D0A /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +25,8 @@
 
 /* Begin PBXFileReference section */
 		97379BDC27C8FBDA00DBA602 /* PalindromCppSolution */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PalindromCppSolution; sourceTree = BUILT_PRODUCTS_DIR; };
-		97379BDF27C8FBDA00DBA602 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		97379BDF27C8FBDA00DBA602 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		B51F21A327CEB037008C0717 /* SmallNumbersFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmallNumbersFinder.h; sourceTree = "<group>"; };
 		B550EEBB27CAAD1C008D2FA5 /* LargeNumbersFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LargeNumbersFinder.h; sourceTree = "<group>"; };
 		B572D6AF27CA56BF006C3D0A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -45,6 +46,7 @@
 		97379BD327C8FBDA00DBA602 = {
 			isa = PBXGroup;
 			children = (
+				B51F21A327CEB037008C0717 /* SmallNumbersFinder.h */,
 				B550EEBB27CAAD1C008D2FA5 /* LargeNumbersFinder.h */,
 				97379BDE27C8FBDA00DBA602 /* PalindromCppSolution */,
 				97379BDD27C8FBDA00DBA602 /* Products */,
@@ -63,7 +65,7 @@
 		97379BDE27C8FBDA00DBA602 /* PalindromCppSolution */ = {
 			isa = PBXGroup;
 			children = (
-				97379BDF27C8FBDA00DBA602 /* main.cpp */,
+				97379BDF27C8FBDA00DBA602 /* main.mm */,
 			);
 			path = PalindromCppSolution;
 			sourceTree = "<group>";
@@ -133,7 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97379BE027C8FBDA00DBA602 /* main.cpp in Sources */,
+				97379BE027C8FBDA00DBA602 /* main.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

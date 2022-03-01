@@ -8,7 +8,6 @@
 #ifndef LargeNumbersFinder_hpp
 #define LargeNumbersFinder_hpp
 
-#include "LargeNumbersFinder.h"
 #include <iostream>
 #include <cmath>
 #include <arm_acle.h>
@@ -20,7 +19,7 @@ void intialize_large_10_pow_vector();
 
 std::vector<__uint128_t> large_pow_10_vector = {};
 
-extern int counter;
+extern std::atomic_int counter;
 
 void intialize_large_10_pow_vector() {
   // 10^39 doesn't fit into 2^128, so we go until 10^38.
@@ -31,7 +30,7 @@ void intialize_large_10_pow_vector() {
   }
 }
 
-bool inline failFastIsDecimalPalindromLarge(const __uint128_t l) {
+inline bool failFastIsDecimalPalindromLarge(const __uint128_t l) {
     const int decimal_length = std::floor(std::log10(l)) + 1;
     int upper_10_pow = decimal_length - 1;
     int lower_10_pow = 1;
@@ -51,28 +50,40 @@ bool inline failFastIsDecimalPalindromLarge(const __uint128_t l) {
     return true;
 }
 
-inline void print128BitsNumber(const __uint128_t num) {
-  std::cout << (__uint64_t)(num >> 64) << (__uint64_t)num << "\n" << std::bitset<128>(num) << "\n\n";
+std::string toString(__uint128_t num) {
+    std::string str;
+    do {
+        int digit = num % 10;
+        str = std::to_string(digit) + str;
+        num = (num - digit) / 10;
+    } while (num != 0);
+    return str;
 }
 
-inline void printIfDecimalPalindromeLarge(const __uint128_t binaryPalindrome) {
+inline void print128BitsNumber(const __uint128_t num) {
+  std::cout << toString(num) << std::endl << std::bitset<128>(num) << std::endl;
+}
+
+inline void printIfDecimalPalindromeLarge(const unsigned long originalNum,
+                                          const __uint128_t binaryPalindrome) {
   if (failFastIsDecimalPalindromLarge(binaryPalindrome)) {
     counter += 1;
-    std::cout << counter << "\n";
+    std::cout << counter << std::endl;
     print128BitsNumber(binaryPalindrome);
+    std::cout << "original number:" << originalNum << std::endl << std::endl;
   }
 }
 
-void checkLargePalindromes(const unsigned long num, const unsigned int num_length) {
+inline void checkLargePalindromes(const unsigned long num, const unsigned int num_length) {
   __uint128_t reversedLowerHalf = (__uint128_t)__rbitll(num) >> (64 - num_length);
   __uint128_t palindromeToCheck = ((__uint128_t)num << num_length) | reversedLowerHalf;
-  printIfDecimalPalindromeLarge(palindromeToCheck);
+  printIfDecimalPalindromeLarge(num, palindromeToCheck);
 
   palindromeToCheck = ((__uint128_t)num << (num_length + 1)) | reversedLowerHalf;
-  printIfDecimalPalindromeLarge(palindromeToCheck);
+  printIfDecimalPalindromeLarge(num, palindromeToCheck);
 
   palindromeToCheck = palindromeToCheck | ((__uint128_t)1 << num_length);
-  printIfDecimalPalindromeLarge(palindromeToCheck);
+  printIfDecimalPalindromeLarge(num, palindromeToCheck);
 }
 
 #endif /* LargeNumbersFinder_hpp */

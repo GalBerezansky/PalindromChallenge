@@ -1,18 +1,12 @@
 //
-//  main.cpp
+//  LargeNumbersFinderMultiThread.h
 //  PalindromCppSolution
 //
-//  Created by Gal Berezansky on 25/02/2022.
+//  Created by Ben Yohay on 01/03/2022.
 //
 
-#include <iostream>
-#include <cmath>
-#include <arm_acle.h>
-#include <vector>
-
-#import <QuartzCore/QuartzCore.h>
-
-#import "LargeNumbersFinder.h"
+#ifndef LargeNumbersFinderMultiThread_h
+#define LargeNumbersFinderMultiThread_h
 
 std::vector<unsigned long long> small_pow_10_vector = {};
 
@@ -56,9 +50,9 @@ bool inline failFastIsDecimalPalindrom(const unsigned long long l) {
 
 // This was chosen because the resulting palindrome is contained in 2^64 for small numbers, and the
 // 2^31 concatenated with itself and adding one bit can be at most 2^63 bits.
-__uint128_t smallPalindromesThreshold = ((unsigned long)1) << 31;
+unsigned long smallPalindromesThreshold = ((unsigned long)1) << 31;
 
-int counter = 2;
+extern std::atomic_int counter;
 
 inline void printIfDecimalPalindrome(__uint64_t binaryPalindrome) {
   if (failFastIsDecimalPalindrom(binaryPalindrome)) {
@@ -84,33 +78,4 @@ inline void checkSmallPalindromes(const unsigned long num) {
   printIfDecimalPalindrome(palindromeToCheck);
 }
 
-void find_palindroms() {
-  auto start = CACurrentMediaTime();
-
-  for (unsigned long i = 1; i < smallPalindromesThreshold; ++i) {
-    checkSmallPalindromes(i);
-  }
-
-  auto end = CACurrentMediaTime();
-  
-  std::cout << "Starting large palindromes, time: " << end - start << std::endl;
-
-  // 2533136923 generates the palyndrom 10879740244204797801. (good for sanity checks.  )
-  for (unsigned long i = smallPalindromesThreshold; i < smallPalindromesThreshold * 2; ++i) {
-    checkLargePalindromes(i, 32);
-  }
-}
-
-int main(int argc, const char * argv[]) {
-  std::cout << 1 << "\n" << 0 << "\n\n" << 2 << "\n" << 1 << "\n\n";
-
-  auto start = CACurrentMediaTime();
-
-  intialize_small_10_pow_vector();
-  intialize_large_10_pow_vector();
-  find_palindroms();
-
-  auto end = CACurrentMediaTime();
-  printf("Time: %f\n", end - start);
-  return 0;
-}
+#endif /* LargeNumbersFinderMultiThread_h */
