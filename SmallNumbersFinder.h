@@ -10,7 +10,7 @@
 
 std::vector<unsigned long long> small_pow_10_vector = {};
 
-extern std::vector<unsigned long long> small_palindromes_vecotr = { 0, 1 };
+std::vector<unsigned long long> small_palindromes_vecotr = { 0, 1 };
 
 void intialize_small_10_pow_vector() {
   // 10^20 doesn't fit into 2^64, so we go until 10^19.

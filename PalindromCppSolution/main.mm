@@ -89,7 +89,7 @@ int main(int argc, const char * argv[]) {
   intialize_large_10_pow_vector();
   auto group = find_palindromes_multi_threading();
   
-  dispatch_wait(group, DISPATCH_TIME_FOREVER);
+  dispatch_wait(group, dispatch_time(DISPATCH_TIME_NOW, 10 * 60 * NSEC_PER_SEC));
 
   auto end = CACurrentMediaTime();
   printf("Time: %f\n", end - start);

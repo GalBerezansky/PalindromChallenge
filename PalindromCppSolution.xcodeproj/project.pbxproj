@@ -256,6 +256,7 @@
 		97379BE427C8FBDA00DBA602 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = arm64e;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KG6GWND6BG;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -267,6 +268,7 @@
 		97379BE527C8FBDA00DBA602 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = arm64e;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KG6GWND6BG;
 				ENABLE_HARDENED_RUNTIME = YES;
