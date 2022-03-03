@@ -10,6 +10,8 @@
 
 std::vector<unsigned long long> small_pow_10_vector = {};
 
+extern std::vector<unsigned long long> small_palindromes_vecotr = { 0, 1 };
+
 void intialize_small_10_pow_vector() {
   // 10^20 doesn't fit into 2^64, so we go until 10^19.
   unsigned long long value = 1;
@@ -56,9 +58,7 @@ extern std::atomic_int counter;
 
 inline void printIfDecimalPalindrome(__uint64_t binaryPalindrome) {
   if (failFastIsDecimalPalindrom(binaryPalindrome)) {
-    counter += 1;
-    std::cout << counter << "\n";
-    std::cout << binaryPalindrome << "\n" << std::bitset<64>(binaryPalindrome) << "\n\n";
+    small_palindromes_vecotr.push_back(binaryPalindrome);
   }
 }
 

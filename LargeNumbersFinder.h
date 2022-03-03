@@ -61,16 +61,13 @@ std::string toString(__uint128_t num) {
 }
 
 inline void print128BitsNumber(const __uint128_t num) {
-  std::cout << toString(num) << std::endl << std::bitset<128>(num) << std::endl;
+  std::cout << toString(num) << std::endl;
 }
 
 inline void printIfDecimalPalindromeLarge(const unsigned long originalNum,
                                           const __uint128_t binaryPalindrome) {
   if (failFastIsDecimalPalindromLarge(binaryPalindrome)) {
-    counter += 1;
-    std::cout << counter << std::endl;
     print128BitsNumber(binaryPalindrome);
-    std::cout << "original number:" << originalNum << std::endl << std::endl;
   }
 }
 

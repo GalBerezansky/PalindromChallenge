@@ -17,6 +17,18 @@
 #import "SmallNumbersFinder.h"
 
 std::atomic_int counter = 2;
+std::atomic_int amountOfSmallPalindromRunningQueues = 10;
+
+void print_all_small_palindromes() {
+  if (amountOfSmallPalindromRunningQueues > 0) {
+    return;
+  }
+
+  std::sort(small_palindromes_vecotr.begin(), small_palindromes_vecotr.end());
+  for(unsigned long long p: small_palindromes_vecotr) {
+    std::cout << p << std::endl;
+  }
+}
 
 dispatch_group_t find_palindromes_multi_threading() {
   auto group = dispatch_group_create();
@@ -30,9 +42,22 @@ dispatch_group_t find_palindromes_multi_threading() {
         checkSmallPalindromes(i);
       }
 
+      amountOfSmallPalindromRunningQueues--;
+      print_all_small_palindromes();
+
       for (unsigned long i = smallPalindromesThreshold + initialValue.unsignedLongValue;
            i < smallPalindromesThreshold * 2; i += 10) {
         checkLargePalindromes(i, 32);
+      }
+
+      for (unsigned long i = smallPalindromesThreshold * 2 + initialValue.unsignedLongValue;
+           i < smallPalindromesThreshold * 4; i += 10) {
+        checkLargePalindromes(i, 33);
+      }
+
+      for (unsigned long i = smallPalindromesThreshold * 4 + initialValue.unsignedLongValue;
+           i < smallPalindromesThreshold * 8; i += 10) {
+        checkLargePalindromes(i, 34);
       }
     });
   }
@@ -58,8 +83,6 @@ void find_palindroms() {
 }
 
 int main(int argc, const char * argv[]) {
-  std::cout << 1 << "\n" << 0 << "\n\n" << 2 << "\n" << 1 << "\n\n";
-
   auto start = CACurrentMediaTime();
 
   intialize_small_10_pow_vector();
